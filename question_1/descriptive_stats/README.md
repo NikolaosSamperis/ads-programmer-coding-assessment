@@ -1,6 +1,12 @@
 # descriptiveStats
 
+![R](https://img.shields.io/badge/R-%3E%3D4.2.0-276DC3?logo=r)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
+![test passing](https://img.shields.io/badge/tests-50%20passing-brightgreen.svg)
+
 A lightweight R package providing six descriptive-statistics functions for numeric vectors:
+
 
 | Function       | Description                                 |
 |----------------|---------------------------------------------|
@@ -109,6 +115,6 @@ descriptive_stats/
 ## Testing
 
 ```r
-devtools::test()        # run unit tests
-devtools::check()       # full R CMD check
+devtools::test(".")        # run unit tests
+devtools::check(".")       # full R CMD check
 ```
