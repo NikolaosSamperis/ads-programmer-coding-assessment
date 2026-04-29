@@ -8,7 +8,7 @@
 #'   Defaults to `TRUE`.
 #'
 #' @return A single numeric value: the median of `x`. Returns `NA_real_`
-#'   if `x` is empty (or becomes empty after `NA` removal).
+#'  if `x` is empty or if `x` contains `NA` values and `na.rm = FALSE`.
 #'
 #' @examples
 #' calc_median(c(1, 2, 2, 3, 4, 5, 5, 5, 6, 10))
@@ -24,13 +24,12 @@
 #'
 #' @export
 calc_median <- function(x, na.rm = TRUE) {
-  x <- validate_numeric(x, na.rm = na.rm, fn_name = "calc_median")
-  n <- length(x)
-  if (n == 0) return(NA_real_)
-  x_sorted <- sort(x)
-  if (n %% 2 == 1) {
-    x_sorted[(n + 1) / 2]
-  } else {
-    mean(x_sorted[c(n / 2, n / 2 + 1)])
-  }
+  # Pass na.rm = FALSE to validate_numeric so that NAs are preserved in x.
+  # NA removal is delegated entirely to stats::median(), which handles
+  # the user's na.rm argument.
+  x <- validate_numeric(x, na.rm = FALSE, fn_name = "calc_median")
+  if (length(x) == 0) return(NA_real_)
+  result <- stats::median(x, na.rm = na.rm)
+  if (is.na(result)) return(NA_real_)
+  result
 }

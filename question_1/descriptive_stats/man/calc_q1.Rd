@@ -14,7 +14,8 @@ Defaults to \code{TRUE}.}
 }
 \value{
 A single numeric value: the first quartile of \code{x}. Returns
-\code{NA_real_} if \code{x} is empty (or becomes empty after \code{NA} removal).
+\code{NA_real_} if \code{x} is empty or if \code{x} contains \code{NA} values and
+\code{na.rm = FALSE}.
 }
 \description{
 Computes the first quartile (25th percentile) of a numeric vector using

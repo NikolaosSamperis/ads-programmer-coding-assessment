@@ -17,15 +17,24 @@ A numeric vector containing the mode(s) of \code{x}:
 \itemize{
 \item A single value if there is one unique mode.
 \item A vector of values if multiple values are tied for the maximum frequency.
-\item \code{NA_real_} if no mode exists (all values appear exactly once) or \code{x}
-is empty.
+\item \code{NA_real_} if no mode exists (all values appear exactly once and length
+is greater than 1), or if \code{x} is empty, or if \code{x} contains \code{NA} values
+and \code{na.rm = FALSE}.
 }
 }
 \description{
 Computes the mode (most frequently occurring value) of a numeric vector.
 Handles ties by returning all values that share the maximum frequency.
-If every value occurs exactly once, the vector is considered to have no
-mode and \code{NA_real_} is returned with a message.
+If every value occurs exactly once and the vector has more than one element,
+the vector is considered to have no mode and \code{NA_real_} is returned with
+a message.
+}
+\details{
+Unlike \code{\link[=calc_mean]{calc_mean()}} and \code{\link[=calc_median]{calc_median()}}, the mode is the only measure of
+central tendency applicable to categorical (nominal) data. This implementation
+is intentionally restricted to numeric vectors to remain consistent with the
+rest of the package. For categorical data, the mode can be found directly
+using \code{names(which.max(table(x)))} in base R.
 }
 \examples{
 # Single mode
@@ -39,5 +48,9 @@ calc_mode(c(1, 1, 2, 2, 3))
 # No mode (all unique)
 calc_mode(c(1, 2, 3, 4))
 # NA
+
+#' # Single value is its own mode
+calc_mode(7)
+# 7
 
 }

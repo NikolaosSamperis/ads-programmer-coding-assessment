@@ -8,8 +8,9 @@
 #'   Defaults to `TRUE`.
 #'
 #' @return A single numeric value: the first quartile of `x`. Returns
-#'   `NA_real_` if `x` is empty (or becomes empty after `NA` removal).
-#'
+#'   `NA_real_` if `x` is empty or if `x` contains `NA` values and
+#'   `na.rm = FALSE`.
+#'   
 #' @examples
 #' calc_q1(c(1, 2, 2, 3, 4, 5, 5, 5, 6, 10))
 #' # 2.25
@@ -20,7 +21,12 @@
 #' @seealso [calc_q3()], [calc_iqr()]
 #' @export
 calc_q1 <- function(x, na.rm = TRUE) {
-  x <- validate_numeric(x, na.rm = na.rm, fn_name = "calc_q1")
+  # Pass na.rm = FALSE to validate_numeric so NAs are preserved.
+  # NA removal is delegated to stats::quantile() via its na.rm argument.
+  x <- validate_numeric(x, na.rm = FALSE, fn_name = "calc_q1")
   if (length(x) == 0) return(NA_real_)
-  unname(stats::quantile(x, probs = 0.25, type = 7, names = FALSE))
+  result <- unname(stats::quantile(x, probs = 0.25, type = 7, 
+                                   na.rm = na.rm, names = FALSE))
+  if (is.na(result)) return(NA_real_)
+  result
 }

@@ -2,10 +2,10 @@ Package: descriptiveStats
 Title: Descriptive Statistics Functions for Numeric Vectors
 Version: 0.1.0
 Authors@R:
-    person(given = "Your",
-           family = "Name",
+    person(given = "Nikolaos",
+           family = "Samperis",
            role = c("aut", "cre"),
-           email = "your.email@example.com")
+           email = "nick.saberis@yahoo.com")
 Description: A lightweight collection of descriptive statistics functions
     including mean, median, mode, first quartile, third quartile, and
     interquartile range. Functions handle edge cases such as empty vectors,
@@ -14,7 +14,7 @@ Description: A lightweight collection of descriptive statistics functions
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.3
 Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

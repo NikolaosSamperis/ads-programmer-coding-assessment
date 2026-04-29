@@ -23,9 +23,9 @@ test_that("calc_q3 matches stats::quantile type 7", {
 
 test_that("quartile functions handle NA values", {
   x <- c(1, 2, 2, 3, 4, NA, 5, 5, 5, 6, 10)
-  expect_equal(calc_q1(x), 2.5)
-  expect_equal(calc_q3(x), 5.5)
-  expect_equal(calc_iqr(x), 3)
+  expect_equal(calc_q1(x), 2.25)
+  expect_equal(calc_q3(x), 5.0)
+  expect_equal(calc_iqr(x), 2.75)
 })
 
 test_that("quartile functions return NA on empty vector", {

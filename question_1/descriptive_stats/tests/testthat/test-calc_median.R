@@ -19,7 +19,7 @@ test_that("calc_median handles NA values when na.rm = TRUE", {
 })
 
 test_that("calc_median returns NA when na.rm = FALSE and NAs present", {
-  expect_true(is.na(calc_median(c(1, 2, NA, 4), na.rm = FALSE)))
+  expect_equal(calc_median(c(1, 2, NA, 4), na.rm = FALSE), NA_real_)
 })
 
 test_that("calc_median returns NA on empty vector with warning", {

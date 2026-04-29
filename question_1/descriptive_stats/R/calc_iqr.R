@@ -20,7 +20,11 @@
 #' @seealso [calc_q1()], [calc_q3()]
 #' @export
 calc_iqr <- function(x, na.rm = TRUE) {
-  x <- validate_numeric(x, na.rm = na.rm, fn_name = "calc_iqr")
+  # Pass na.rm = FALSE to validate_numeric so NAs are preserved.
+  # NA removal is delegated to calc_q1() and calc_q3() via their na.rm argument.
+  x <- validate_numeric(x, na.rm = FALSE, fn_name = "calc_iqr")
   if (length(x) == 0) return(NA_real_)
-  calc_q3(x, na.rm = FALSE) - calc_q1(x, na.rm = FALSE)
+  result <- calc_q3(x, na.rm = na.rm) - calc_q1(x, na.rm = na.rm)
+  if (is.na(result)) return(NA_real_)
+  result
 }

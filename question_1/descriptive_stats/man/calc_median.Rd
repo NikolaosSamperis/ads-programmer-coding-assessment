@@ -14,7 +14,7 @@ Defaults to \code{TRUE}.}
 }
 \value{
 A single numeric value: the median of \code{x}. Returns \code{NA_real_}
-if \code{x} is empty (or becomes empty after \code{NA} removal).
+if \code{x} is empty or if \code{x} contains \code{NA} values and \code{na.rm = FALSE}.
 }
 \description{
 Computes the median (middle value) of a numeric vector. For vectors of
