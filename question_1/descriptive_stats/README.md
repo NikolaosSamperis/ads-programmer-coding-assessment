@@ -66,14 +66,20 @@ calc_iqr(data)     # 2.75
 ## Edge Cases
 
 ```r
-# Empty vector — warning + NA
+# Empty vector — warning + NA_real_
 calc_mean(numeric(0))
+#> [1] NA
+#> Warning message:
+#> `calc_mean()`: input 'x' is an empty vector; returning NA.
 
 # Mode with ties — returns all tied values
-calc_mode(c(1, 1, 2, 2, 3))     # c(1, 2)
+calc_mode(c(1, 1, 2, 2, 3))
+#> [1] 1 2
 
-# Mode when every value is unique — message + NA
-calc_mode(c(1, 2, 3, 4))        # NA
+# Mode when every value is unique — message + NA_real_
+calc_mode(c(1, 2, 3, 4))
+#> `calc_mode()`: no mode found (all values are unique); returning NA.
+#> [1] NA
 
 # Non-numeric input — informative error
 calc_mean("a")
