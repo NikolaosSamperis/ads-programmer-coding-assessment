@@ -1,6 +1,6 @@
 # Question 2 — SDTM DS Domain Creation
 
-![R](https://img.shields.io/badge/R-%3E%3D4.2.0-276DC3?logo=r&logoColor=white)
+![R](https://img.shields.io/badge/R-%3E%3D4.2.0-276DC3?logo=r)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Pharmaverse](https://img.shields.io/badge/Pharmaverse-sdtm.oak-blue)
 
