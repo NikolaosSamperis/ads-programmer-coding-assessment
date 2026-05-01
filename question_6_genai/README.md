@@ -26,7 +26,6 @@ question_6_genai/
 ├── requirements.txt           # Python dependencies
 ├── .env.example               # template for ANTHROPIC_API_KEY (safe to commit)
 ├── .env                       # your real API key — never committed (in .gitignore)
-├── .gitignore                 # excludes .env, .venv/, __pycache__/, data/adae.csv
 ├── schema.py                  # ADAE schema (LLM- and code-facing)
 ├── clinical_agent.py          # ClinicalTrialDataAgent class
 ├── test_agent.py              # demo script — runs 3 example queries
