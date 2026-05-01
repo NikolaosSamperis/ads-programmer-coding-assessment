@@ -29,7 +29,7 @@ question_5_api/
 ## Setup
 
 ### Prerequisites
-- Python 3.12+
+- Python 3.11+
 - R 4.2+ with `pharmaverseadam` installed
 - A virtual environment manager (venv or conda)
 
@@ -45,15 +45,15 @@ This will create `data/adae.csv` containing the required columns (`USUBJID`, `AE
 
 ### Step 2 — Create a virtual environment
 
-**Option A — venv (PowerShell on Windows)**
-```powershell
+**Option A — venv (Git Bash on Windows)**
+```bash
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+source .venv/Scripts/activate
 ```
 
 **Option B — conda**
 ```bash
-conda create -n q5_api python=3.12 -y
+conda create -n q5_api python=3.11 -y
 conda activate q5_api
 ```
 
