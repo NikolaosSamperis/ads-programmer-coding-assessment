@@ -7,3 +7,10 @@ __pycache__/
 *.pyc
 .env
 *.Rproj
+
+# Question 5 - FastAPI
+question_5_api/.venv/
+question_5_api/__pycache__/
+question_5_api/.pytest_cache/
+question_5_api/data/adae.csv
+question_5_api/.idea/
