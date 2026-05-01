@@ -14,3 +14,12 @@ question_5_api/__pycache__/
 question_5_api/.pytest_cache/
 question_5_api/data/adae.csv
 question_5_api/.idea/
+
+# Question 6 - GenAI Clinical Data Assistant
+question_6_genai/.env
+question_6_genai/.venv
+question_6_genai/__pycache__/
+question_6_genai/*.pyc
+question_6_genai/*.pyo
+question_6_genai/data/adae.csv
+question_6_genai/.Rhistory
