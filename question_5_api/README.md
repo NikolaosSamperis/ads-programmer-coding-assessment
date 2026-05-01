@@ -1,6 +1,6 @@
 # Question 5 — Clinical Trial Data API
 
-![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.110-green?logo=fastapi)
 ![Pandas](https://img.shields.io/badge/Pandas-2.0-150458?logo=pandas)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
