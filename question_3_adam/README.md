@@ -107,6 +107,16 @@ API that replaces the deprecated `date_source()` / `derive_var_extreme_dt()`
 pair. EXSTDT is included alongside EXENDT so subjects whose `EXENDTC` is
 missing still contribute via the start date.
 
+> **Expected duplicate warning:** `derive_vars_extreme_event()` emits a
+> warning about duplicate records with respect to `STUDYID`, `USUBJID`, and
+> `LSTALVDT`. Inspecting `admiral::get_duplicates_dataset()` confirms these
+> are all VS-source rows where multiple vital signs observations (e.g. systolic
+> BP, diastolic BP, heart rate) share the same visit date, producing identical
+> `LSTALVDT` candidates for the same subject on the same day. This is expected
+> behaviour for a multi-test vital signs dataset. The warning is benign —
+> `mode = "last"` correctly resolves ties and the derived `LSTALVDT` values
+> are accurate.
+
 ## Validation
 
 The script ends with a validation block that checks every derivation
