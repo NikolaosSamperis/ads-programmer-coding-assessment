@@ -24,9 +24,13 @@ from pydantic import BaseModel, Field
 # Configuration
 # ---------------------------------------------------------------------------
 
+# Resolve the path to adae.csv relative to this file so the API works
+# regardless of which directory uvicorn is launched from.
 DATA_PATH = Path(__file__).parent / "data" / "adae.csv"
 
 # Risk weights per AESEV value (compared in upper case).
+# These are defined once here so they can be reused across endpoints
+# and updated easily if new severity levels are introduced.
 SEVERITY_WEIGHTS = {
     "MILD": 1,
     "MODERATE": 3,
@@ -35,6 +39,7 @@ SEVERITY_WEIGHTS = {
 
 # Risk-category cut-offs – matches the spec exactly.
 def _categorize_risk(score: int) -> str:
+    # Boundaries: <5 = Low, 5-14 = Medium, >=15 = High
     if score < 5:
         return "Low"
     if score < 15:
@@ -53,6 +58,7 @@ def load_ae_data(path: Path = DATA_PATH) -> pd.DataFrame:
     and to contain at least: USUBJID, AESEV, ACTARM. Other columns are kept
     untouched so the same DataFrame can be reused by other endpoints later.
     """
+    # Fail fast at startup rather than returning a 500 on the first request
     if not path.exists():
         raise FileNotFoundError(
             f"ADAE dataset not found at {path}. "
@@ -62,6 +68,7 @@ def load_ae_data(path: Path = DATA_PATH) -> pd.DataFrame:
 
     df = pd.read_csv(path)
 
+    # Validate that all columns the endpoints depend on are present
     required = {"USUBJID", "AESEV", "ACTARM"}
     missing = required - set(df.columns)
     if missing:
@@ -76,7 +83,8 @@ def load_ae_data(path: Path = DATA_PATH) -> pd.DataFrame:
 
     return df
 
-
+# Load the dataset once at startup — the API is read-only so a single
+# process-wide DataFrame is safe and keeps every request O(rows).
 ae_df: pd.DataFrame = load_ae_data()
 
 
@@ -100,14 +108,16 @@ class AEQueryRequest(BaseModel):
 
 
 class AEQueryResponse(BaseModel):
+    # Total number of AE records matching the filters
     count: int
+    # Unique subject IDs in the filtered cohort, sorted alphabetically
     subjects: List[str]
 
 
 class SubjectRiskResponse(BaseModel):
     subject_id: str
-    risk_score: int
-    risk_category: str
+    risk_score: int     # Sum of severity weights across all AEs
+    risk_category: str  # Low / Medium / High based on risk_score
 
 
 # ---------------------------------------------------------------------------
@@ -141,17 +151,22 @@ def ae_query(filters: AEQueryRequest) -> AEQueryResponse:
     Filters that are ``null`` or omitted are ignored, so an empty body
     returns every record.
     """
+
+    # Start with the full dataset and narrow down based on provided filters
     df = ae_df
 
     if filters.severity:
+        # Normalise to upper case so "mild", "Mild", "MILD" all match
         wanted = {s.strip().upper() for s in filters.severity if s}
         if wanted:
             df = df[df["AESEV"].str.upper().isin(wanted)]
 
     if filters.treatment_arm:
+        # casefold() is a more aggressive lowercase for unicode safety
         target = filters.treatment_arm.strip().casefold()
         df = df[df["ACTARM"].str.casefold() == target]
 
+    # Return unique subject IDs sorted alphabetically for consistent output
     subjects = sorted(df["USUBJID"].dropna().unique().tolist())
     return AEQueryResponse(count=int(len(df)), subjects=subjects)
 
@@ -169,8 +184,11 @@ def subject_risk(subject_id: str) -> SubjectRiskResponse:
     * Other / missing severities contribute 0
     * Categories: <5 Low, 5–14 Medium, ≥15 High
     """
+
+    # Filter the dataset to only this subject's AE records
     subj_df = ae_df[ae_df["USUBJID"] == subject_id]
 
+    # Return 404 if the subject ID is not found in the dataset
     if subj_df.empty:
         raise HTTPException(
             status_code=404,
@@ -180,9 +198,9 @@ def subject_risk(subject_id: str) -> SubjectRiskResponse:
     score = int(
         subj_df["AESEV"]
         .str.upper()
-        .map(SEVERITY_WEIGHTS)
-        .fillna(0)
-        .sum()
+        .map(SEVERITY_WEIGHTS)    # Map each severity to its point value
+        .fillna(0)                # Unknown or missing severities contribute 0
+        .sum()                    # Total risk score across all AEs
     )
 
     return SubjectRiskResponse(
