@@ -1,7 +1,7 @@
 # descriptiveStats
 
 ![R](https://img.shields.io/badge/R-%3E%3D4.2.0-276DC3?logo=r)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/NikolaosSamperis/ads-programmer-coding-assessment/blob/main/LICENSE)
 ![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 ![test passing](https://img.shields.io/badge/tests-50%20passing-brightgreen.svg)
 
