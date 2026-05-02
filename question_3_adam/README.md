@@ -1,7 +1,7 @@
 # Question 3 — ADaM ADSL Dataset Creation
 
 ![R](https://img.shields.io/badge/R-%3E%3D4.2.0-276DC3?logo=r)
-![License](https://img.shields.io/badge/License-MIT-green)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/NikolaosSamperis/ads-programmer-coding-assessment/blob/main/LICENSE)
 ![Pharmaverse](https://img.shields.io/badge/Pharmaverse-admiral-blue)
 
 This folder builds the **ADaM ADSL (Subject Level Analysis Dataset)** from
