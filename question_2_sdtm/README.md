@@ -1,7 +1,7 @@
 # Question 2 — SDTM DS Domain Creation
 
 ![R](https://img.shields.io/badge/R-%3E%3D4.2.0-276DC3?logo=r)
-![License](https://img.shields.io/badge/License-MIT-green)
+![License](https://img.shields.io/badge/License-MIT-green)(https://github.com/NikolaosSamperis/ads-programmer-coding-assessment/blob/main/LICENSE)
 ![Pharmaverse](https://img.shields.io/badge/Pharmaverse-sdtm.oak-blue)
 
 This folder builds the **SDTM Disposition (DS)** domain from
