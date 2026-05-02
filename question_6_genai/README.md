@@ -4,7 +4,7 @@
 ![LangChain](https://img.shields.io/badge/LangChain-1.2%2B-brightgreen?logo=chainlink&logoColor=white)
 ![Anthropic](https://img.shields.io/badge/Anthropic-Claude-orange?logo=anthropic&logoColor=white)
 ![Pharmaverse](https://img.shields.io/badge/Data-Pharmaverse-blueviolet)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/NikolaosSamperis/ads-programmer-coding-assessment/blob/main/LICENSE)
 
 A natural-language interface to an Adverse Events (AE) DataFrame, powered by
 Anthropic's Claude via LangChain. A clinical safety reviewer can ask free-text
